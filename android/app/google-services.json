@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "50398244024",
+    "project_id": "shopeasy-a7380",
+    "storage_bucket": "shopeasy-a7380.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50398244024:android:76e9d2e1a2439c959c184d",
+        "android_client_info": {
+          "package_name": "com.example.shopeasy_getx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50398244024-68dae8slfmprl9isbb9pejrptir47ipd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmM7iZiwPGN_vTZ2B8YRgVDX-zzx6jAWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50398244024-68dae8slfmprl9isbb9pejrptir47ipd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50398244024-rf7df199s939aqhlj38l1qvl8vi7rm24.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.shopeasyGetx"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50398244024:android:31aaa156cbf7c08a9c184d",
+        "android_client_info": {
+          "package_name": "com.flutterapp.shopeasy_getx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50398244024-prr3b0cg6ct75oaug35183jmv9f2o9ek.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterapp.shopeasy_getx",
+            "certificate_hash": "c0de8fda60ab9bdf436eeaa3db1c7798fc1c5327"
+          }
+        },
+        {
+          "client_id": "50398244024-68dae8slfmprl9isbb9pejrptir47ipd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmM7iZiwPGN_vTZ2B8YRgVDX-zzx6jAWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50398244024-68dae8slfmprl9isbb9pejrptir47ipd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50398244024-rf7df199s939aqhlj38l1qvl8vi7rm24.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.shopeasyGetx"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

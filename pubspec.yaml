@@ -29,12 +29,12 @@ dependencies:
   smooth_page_indicator: ^1.1.0
 
   # Web Specific
-  web: ^0.5.1
+  web: 1.0.0
   http: ^1.1.2
   html: ^0.15.4
-  fl_chart: ^0.68.0
+  fl_chart: ^0.69.0
   data_table_2: ^2.5.9
-  url_strategy: ^0.2.0
+  url_strategy: ^0.3.0
 
   # Icons
   iconsax: ^0.0.8
@@ -46,17 +46,17 @@ dependencies:
 
   # Product Specific
   readmore: ^3.0.0
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   flutter_rating_bar: ^4.0.1
   capped_progress_indicator: ^0.0.2
   custom_rating_bar: ^3.0.0
   flutter_pannable_rating_bar: ^2.7.2+1
 
   # Firebase
-  #firebase_core: ^3.2.0
-  #firebase_auth: ^5.1.2
-  #cloud_firestore: ^5.1.0
-  #firebase_storage: ^12.1.1
+  firebase_core: ^3.4.1
+  firebase_auth: ^5.2.1
+  cloud_firestore: ^5.4.1
+  firebase_storage: ^12.3.0
 
 dev_dependencies:
   flutter_test:

@@ -1,45 +1,57 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:shopeasy_getx/features/authentication/screens/login/login.dart';
+import 'package:shopeasy_getx/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:shopeasy_getx/features/authentication/screens/signup/verify_email.dart';
+import 'package:shopeasy_getx/navigation_menu.dart';
+import 'package:shopeasy_getx/utils/exceptions/firebase_auth_exceptions.dart';
+import 'package:shopeasy_getx/utils/exceptions/firebase_exceptions.dart';
+import 'package:shopeasy_getx/utils/exceptions/format_exceptions.dart';
+import 'package:shopeasy_getx/utils/exceptions/platform_exceptions.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
 
-  ///veriables
-  //final deviceStorage = GetStorage();
-  //final _auth = FirebaseAuth.instance;
+  //veriables
+  final deviceStorage = GetStorage();
+  final _auth = FirebaseAuth.instance;
 
   ///Get authenticated user data
   //User? get authUser => _auth.currentUser;
 
   ///called from main.dart on app launch
-  // @override
-  // void onReady() {
-  //   //Remove the native splash screen
-  //   FlutterNativeSplash.remove();
-  //   //Redirect to the appropriate screen
-  //   screenRedirect();
-  // }
+  @override
+  void onReady() {
+    //Remove the native splash screen
+    FlutterNativeSplash.remove();
+    //Redirect to the appropriate screen
+    screenRedirect();
+  }
 
-  ///function to show relevent screen and redirect accordingly
-  // void screenRedirect() async {
-  //   final user = _auth.currentUser;
-  //   if (user != null) {
-  //     if (user.emailVerified) {
-  //       Get.offAll(() => const NavigationMenu());
-  //     } else {
-  //       Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
-  //     }
-  //   } else {
-  //     deviceStorage.writeIfNull('IsFirstTime', true);
-  //     //check if its the first time luanching the app
-  //     deviceStorage.read('IsFirstTime') != true
-  //         ? Get.offAll(() => const LoginScreen())
-  //         : Get.offAll(const OnBoardingScreen());
-  //   }
-  //local storage
-  // if (kDebugMode) {
-  //   deviceStorage.read('IsFirstTime');
-  // }
-//}
+  //function to show relevent screen and redirect accordingly
+  void screenRedirect() async {
+    //final user = _auth.currentUser;
+    // if (user != null) {
+    //   if (user.emailVerified) {
+    //     Get.offAll(() => const NavigationMenu());
+    //   } else {
+    //     Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
+    //   }
+    // } else {
+    deviceStorage.writeIfNull('IsFirstTime', true);
+    //check if its the first time luanching the app
+    deviceStorage.read('IsFirstTime') != true
+        ? Get.offAll(() => const LoginScreen())
+        : Get.offAll(const OnBoardingScreen());
+    //}
+    // local storage
+    // if (kDebugMode) {
+    //   deviceStorage.read('IsFirstTime');
+    // }
+  }
 /*--------------------------Email & Password sign in----------------------------*/
 
   ///[EmailAuthentication] - LogIn
@@ -62,23 +74,23 @@ class AuthenticationRepository extends GetxController {
   // }
 
   ///[EmailAuthentication] - Register
-  // Future<UserCredential> registerWithEmailAndPassword(
-  //     String email, String password) async {
-  //   try {
-  //     return await _auth.createUserWithEmailAndPassword(
-  //         email: email, password: password);
-  //   } on FirebaseAuthException catch (e) {
-  //     throw RFirebaseAuthException(e.code).message;
-  //   } on FirebaseException catch (e) {
-  //     throw RFirebaseException(e.code).message;
-  //   } on FormatException catch (_) {
-  //     throw const RFormatException();
-  //   } on PlatformException catch (e) {
-  //     throw RPlatformException(e.code).message;
-  //   } catch (e) {
-  //     throw 'Something went wrong . Please try again';
-  //   }
-  // }
+  Future<UserCredential> registerWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      return await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong . Please try again';
+    }
+  }
 
   ///[EmailVerification] - Mail Verification
   // Future<void> sendEmailVerification() async {
