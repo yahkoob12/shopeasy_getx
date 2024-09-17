@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shopeasy_getx/common/widget/appbar/appbar.dart';
 import 'package:shopeasy_getx/common/widget/signup/form_divider.dart';
 import 'package:shopeasy_getx/common/widget/signup/social_buttons.dart';
 import 'package:shopeasy_getx/features/authentication/screens/signup/widgets/signupform.dart';
@@ -12,7 +13,7 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: TAppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),

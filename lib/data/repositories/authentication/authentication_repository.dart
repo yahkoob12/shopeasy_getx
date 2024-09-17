@@ -33,20 +33,27 @@ class AuthenticationRepository extends GetxController {
 
   //function to show relevent screen and redirect accordingly
   void screenRedirect() async {
-    //final user = _auth.currentUser;
-    // if (user != null) {
-    //   if (user.emailVerified) {
-    //     Get.offAll(() => const NavigationMenu());
-    //   } else {
-    //     Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
-    //   }
-    // } else {
-    deviceStorage.writeIfNull('IsFirstTime', true);
-    //check if its the first time luanching the app
-    deviceStorage.read('IsFirstTime') != true
-        ? Get.offAll(() => const LoginScreen())
-        : Get.offAll(const OnBoardingScreen());
-    //}
+    final user = _auth.currentUser;
+    if (user != null) {
+      // if the user is logged in
+      if (user.emailVerified) {
+        // if the user's  email is verified. navigate to the main navigation menu
+        Get.offAll(() => const NavigationMenu());
+      } else {
+        // if the user's email is not verified. navigate to the verificationscreen
+        Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
+      }
+    } else {
+      // local storage
+      deviceStorage.writeIfNull('IsFirstTime', true);
+
+      // check if its the first time luanching the app
+      deviceStorage.read('IsFirstTime') != true
+          ? Get.offAll(() =>
+              const LoginScreen()) // redirect to login screen if not first time
+          : Get.offAll(
+              const OnBoardingScreen()); // redirect to onboarding screen if it's first time
+    }
     // local storage
     // if (kDebugMode) {
     //   deviceStorage.read('IsFirstTime');
@@ -55,23 +62,23 @@ class AuthenticationRepository extends GetxController {
 /*--------------------------Email & Password sign in----------------------------*/
 
   ///[EmailAuthentication] - LogIn
-  // Future<UserCredential> loginWithEmailAndPassword(
-  //     String email, String password) async {
-  //   try {
-  //     return await _auth.signInWithEmailAndPassword(
-  //         email: email, password: password);
-  //   } on FirebaseAuthException catch (e) {
-  //     throw RFirebaseAuthException(e.code).message;
-  //   } on FirebaseException catch (e) {
-  //     throw RFirebaseException(e.code).message;
-  //   } on FormatException catch (_) {
-  //     throw const RFormatException();
-  //   } on PlatformException catch (e) {
-  //     throw RPlatformException(e.code).message;
-  //   } catch (e) {
-  //     throw 'Something went wrong . Please try again';
-  //   }
-  // }
+  Future<UserCredential> loginWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      return await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong . Please try again';
+    }
+  }
 
   ///[EmailAuthentication] - Register
   Future<UserCredential> registerWithEmailAndPassword(
@@ -93,21 +100,21 @@ class AuthenticationRepository extends GetxController {
   }
 
   ///[EmailVerification] - Mail Verification
-  // Future<void> sendEmailVerification() async {
-  //   try {
-  //     await _auth.currentUser?.sendEmailVerification();
-  //   } on FirebaseAuthException catch (e) {
-  //     throw RFirebaseAuthException(e.code).message;
-  //   } on FirebaseException catch (e) {
-  //     throw RFirebaseException(e.code).message;
-  //   } on FormatException catch (_) {
-  //     throw const RFormatException();
-  //   } on PlatformException catch (e) {
-  //     throw RPlatformException(e.code).message;
-  //   } catch (e) {
-  //     throw 'Something went wrong . Please try again';
-  //   }
-  //}
+  Future<void> sendEmailVerification() async {
+    try {
+      await _auth.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong . Please try again';
+    }
+  }
 
   ///[ReAuthenticate] -ReAuthenticate User
   ///
@@ -187,23 +194,23 @@ class AuthenticationRepository extends GetxController {
 /*----------------------------./end Federated identity & social sign-in */
 
   ///[LogoutUser] - valid for any authentication
-  // Future<void> logout() async {
-  //   try {
-  //     await GoogleSignIn().signOut();
-  //     await FirebaseAuth.instance.signOut();
-  //     Get.offAll(() => const LoginScreen());
-  //   } on FirebaseAuthException catch (e) {
-  //     throw RFirebaseAuthException(e.code).message;
-  //   } on FirebaseException catch (e) {
-  //     throw RFirebaseException(e.code).message;
-  //   } on FormatException catch (_) {
-  //     throw const RFormatException();
-  //   } on PlatformException catch (e) {
-  //     throw RPlatformException(e.code).message;
-  //   } catch (e) {
-  //     throw 'Something went wrong . Please try again';
-  //   }
-  // }
+  Future<void> logout() async {
+    try {
+      // await GoogleSignIn().signOut();
+      await FirebaseAuth.instance.signOut();
+      Get.offAll(() => const LoginScreen());
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong . Please try again';
+    }
+  }
 
   ///[DeleteUser] -Remove User Auth and Firestore Account.
   // Future<void> deleteAccount() async {

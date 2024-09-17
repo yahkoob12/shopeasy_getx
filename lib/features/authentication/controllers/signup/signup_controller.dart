@@ -27,7 +27,7 @@ class SignupController extends GetxController {
   GlobalKey<FormState> signupFormkey = GlobalKey<FormState>();
 
   /// -- Signup
-  void signup() async {
+  Future<void> signup() async {
     try {
       // Start Loading
       TFullScreenLoader.openLoadingDialog(
@@ -76,6 +76,9 @@ class SignupController extends GetxController {
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newUser);
 
+      // Remove Loader
+      TFullScreenLoader.stopLoading();
+
       //Show Success Message
       TLoaders.successSnackBar(
           title: 'Congratulations!',
@@ -83,13 +86,17 @@ class SignupController extends GetxController {
               'Your account has been successfully created !.Verify email to continue');
 
       //Move to Verify Email Screen
-      Get.to(() => VerifyEmailScreen());
+      Get.to(() => VerifyEmailScreen(
+            email: email.text.trim(),
+          ));
     } catch (e) {
-      //Show some Generic Error to the user
-      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
-    } finally {
       //Remove Loader
       TFullScreenLoader.stopLoading();
+
+      //Show some Generic Error to the user
+      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
+    //  finally {
+    // }
   }
 }

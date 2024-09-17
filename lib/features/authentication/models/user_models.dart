@@ -72,13 +72,14 @@ class UserModel {
     if (document.data() != null) {
       final data = document.data()!;
       return UserModel(
-          id: document.id,
-          firstName: data['FirstName'] ?? '',
-          lastName: data['LastName'] ?? '',
-          username: data['UserName'] ?? '',
-          email: data['Email'] ?? '',
-          phoneNumber: data['PhoneNumber'] ?? '',
-          profilePicture: data['ProfilePicture'] ?? '');
+        id: document.id,
+        firstName: data['FirstName'] ?? '',
+        lastName: data['LastName'] ?? '',
+        username: data['UserName'] ?? '',
+        email: data['Email'] ?? '',
+        phoneNumber: data['PhoneNumber'] ?? '',
+        profilePicture: data['ProfilePicture'] ?? '',
+      );
     } else {
       return UserModel.empty();
     }
