@@ -32,102 +32,94 @@ class UserRepository extends GetxController {
   }
 
 //   ///Function to update user data in Firebase.
-//   Future<void> updateUserDetails(UserModel updatedUser) async {
-//     try {
-//       await _db
-//           .collection("Users")
-//           .doc(updatedUser.id)
-//           .update(updatedUser.toJson());
-//     } on FirebaseException catch (e) {
-//       throw TFirebaseException(e.code).message;
-//     } on FormatException catch (_) {
-//       throw const TFormatException();
-//     } on PlatformException catch (e) {
-//       throw TPlatformException(e.code).message;
-//     } catch (e) {
-//       throw 'Something went wrong . Please try again';
-//     }
-//   }
+  Future<void> updateUserDetails(UserModel updatedUser) async {
+    try {
+      await _db
+          .collection("Users")
+          .doc(updatedUser.id)
+          .update(updatedUser.toJson());
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong . Please try again';
+    }
+  }
 
-//   //Function_to_fetch_user_datails based_on user ID
-//   Future<UserModel> fetchUserDetails() async {
-//     try {
-//       final DocumentSnapshot = await _db
-//           .collection("Users")
-//           .doc(AuthenticationRepository.instance.authUser?.uid)
-//           .get();
-//       if (DocumentSnapshot.exists) {
-//         return UserModel.fromSnapshot(DocumentSnapshot);
-//       } else {
-//         return UserModel.empty();
-//       }
-//     } on FirebaseException catch (e) {
-//       throw TFirebaseException(e.code).message;
-//     } on FormatException catch (_) {
-//       throw const TFormatException();
-//     } on PlatformException catch (e) {
-//       throw TPlatformException(e.code).message;
-//     } catch (e) {
-//       throw 'Something went wrong . Please try again';
-//     }
-//   }
+//   //Function to fetch user details based on user ID
+  Future<UserModel> fetchUserDetails() async {
+    try {
+      final DocumentSnapshot = await _db
+          .collection("Users")
+          .doc(AuthenticationRepository.instance.authUser?.uid)
+          .get();
+      if (DocumentSnapshot.exists) {
+        return UserModel.fromSnapshot(DocumentSnapshot);
+      } else {
+        return UserModel.empty();
+      }
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong . Please try again';
+    }
+  }
 
 // //Update any field in specific users collection
-//   Future<void> updateSingleField(Map<String, dynamic> json) async {
-//     try {
-//       await _db
-//           .collection("Users")
-//           .doc(AuthenticationRepository.instance.authUser?.uid)
-//           .update(json);
-//     } on FirebaseException catch (e) {
-//       throw TFirebaseException(e.code).message;
-//     } on FormatException catch (_) {
-//       throw const TFormatException();
-//     } on PlatformException catch (e) {
-//       throw TPlatformException(e.code).message;
-//     } catch (e) {
-//       throw 'Something went wrong . Please try again';
-//     }
-//   }
+  Future<void> updateSingleField(Map<String, dynamic> json) async {
+    try {
+      await _db
+          .collection("Users")
+          .doc(AuthenticationRepository.instance.authUser?.uid)
+          .update(json);
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong . Please try again';
+    }
+  }
 
 // //Fuction to remove user data from Firestore
-//   Future<void> removeUserRecord(String userId) async {
-//     try {
-//       await _db.collection("Users").doc(userId).delete();
-//     } on FirebaseException catch (e) {
-//       throw TFirebaseException(e.code).message;
-//     } on FormatException catch (_) {
-//       throw const TFormatException();
-//     } on PlatformException catch (e) {
-//       throw TPlatformException(e.code).message;
-//     } catch (e) {
-//       throw 'Something went wrong . Please try again';
-//     }
-//   }
+  Future<void> removeUserRecord(String userId) async {
+    try {
+      await _db.collection("Users").doc(userId).delete();
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong . Please try again';
+    }
+  }
 
 // //Upload any image
-//   Future<String> uploadImage(String path, XFile image) async {
-//     try {
-//       final ref = FirebaseStorage.instance.ref(path).child(image.name);
-//       await ref.putFile(File(image.path));
-//       final url = await ref.getDownloadURL();
-//       return url;
-//     } on FirebaseException catch (e) {
-//       throw TFirebaseException(e.code).message;
-//     } on FormatException catch (_) {
-//       throw const TFormatException();
-//     } on PlatformException catch (e) {
-//       throw TPlatformException(e.code).message;
-//     } catch (e) {
-//       throw 'Something went wrong . Please try again';
-//     }
-//   }
-//
-//
-//
-//
-//
-//
-//
-//
+  Future<String> uploadImage(String path, XFile image) async {
+    try {
+      final ref = FirebaseStorage.instance.ref(path).child(image.name);
+      await ref.putFile(File(image.path));
+      final url = await ref.getDownloadURL();
+      return url;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong . Please try again';
+    }
+  }
 }

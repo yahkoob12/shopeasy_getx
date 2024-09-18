@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:shopeasy_getx/features/authentication/screens/password_configuration/reset_password.dart';
+import 'package:shopeasy_getx/features/authentication/controllers/forget_password/forget_password_controller.dart';
+
 import 'package:shopeasy_getx/utils/constants/sizes.dart';
 import 'package:shopeasy_getx/utils/constants/text_strings.dart';
+import 'package:shopeasy_getx/utils/validators/validation.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgetPasswordController());
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -30,11 +33,16 @@ class ForgetPassword extends StatelessWidget {
             const SizedBox(height: TSizes.spaceBtwSections * 2),
 
             ///Text Field
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: TTexts.email,
-                prefixIcon: Icon(
-                  Iconsax.direct_right,
+            Form(
+              key: controller.forgetPasswordFormKey,
+              child: TextFormField(
+                controller: controller.email,
+                validator: TValidator.validateEmail,
+                decoration: const InputDecoration(
+                  labelText: TTexts.email,
+                  prefixIcon: Icon(
+                    Iconsax.direct_right,
+                  ),
                 ),
               ),
             ),
@@ -46,10 +54,8 @@ class ForgetPassword extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Get.off(
-                  () => const ResetPassword(),
-                ),
-                child: const Text(TTexts.submit),
+                onPressed: () => controller.sendPasswordResetEmail(),
+                child: Text(TTexts.submit),
               ),
             ),
           ],

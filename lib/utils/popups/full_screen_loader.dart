@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shopeasy_getx/utils/popups/animation_loader.dart';
 
 import '../constants/colors.dart';
 import '../helpers/helper_functions.dart';
@@ -26,10 +27,10 @@ class TFullScreenLoader {
               : TColors.white,
           width: double.infinity,
           height: double.infinity,
-          child: const Column(
+          child: Column(
             children: [
               SizedBox(height: 250), // Adjust the spacing as needed
-              // TAnimationLoaderWidget(text: text, animation: animation),
+              TAnimationLoaderWidget(text: text, animation: animation),
             ],
           ),
         ),
@@ -41,7 +42,7 @@ class TFullScreenLoader {
     Get.defaultDialog(
       title: '',
       onWillPop: () async => false,
-      // content: const TCircularLoader(),
+      //content: const TCircularLoader(),
       backgroundColor: Colors.transparent,
     );
   }

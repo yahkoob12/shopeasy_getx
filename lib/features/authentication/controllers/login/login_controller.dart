@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shopeasy_getx/data/repositories/authentication/authentication_repository.dart';
+import 'package:shopeasy_getx/features/personalization/controllers/user_controller.dart';
 import 'package:shopeasy_getx/utils/constants/image_strings.dart';
 import 'package:shopeasy_getx/utils/helpers/network_manager.dart';
 import 'package:shopeasy_getx/utils/popups/full_screen_loader.dart';
@@ -16,6 +17,7 @@ class LoginController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  final userController = Get.put(UserController());
   @override
   void onInit() {
     email.text = localStorage.read('REMEMBER_ME_EMAIL') ?? '';
@@ -60,6 +62,38 @@ class LoginController extends GetxController {
       //Redirect
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
+      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+    }
+  }
+
+  /// Google signin authentication
+  Future<void> googleSignIn() async {
+    try {
+      TFullScreenLoader.openLoadingDialog(
+          'Logging You In', TImages.docerAnimation);
+      final isConnected = await NetworkManager.instance.isConnected();
+
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      ///google authentication
+      final userCredentials =
+          await AuthenticationRepository.instance.signWithGoogle();
+
+      ///save user record
+      await userController.saveUserRecord(userCredentials);
+
+      ///remove loader
+      TFullScreenLoader.stopLoading();
+
+      ///redirect
+      AuthenticationRepository.instance.screenRedirect();
+
+      ///
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }
