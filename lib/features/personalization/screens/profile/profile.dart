@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shopeasy_getx/common/widget/appbar/appbar.dart';
 import 'package:shopeasy_getx/common/widget/images/circular_image.dart';
+import 'package:shopeasy_getx/common/widget/shimmers/shimmer.dart';
 import 'package:shopeasy_getx/common/widget/texts/section_heading.dart';
 import 'package:shopeasy_getx/features/authentication/screens/login/login.dart';
 import 'package:shopeasy_getx/features/personalization/controllers/user_controller.dart';
@@ -33,13 +34,22 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    TCircularImage(
-                      image: TImages.user,
-                      width: 80,
-                      height: 80,
-                    ),
+                    Obx(() {
+                      final networkImage = controller.user.value.profilePicture;
+                      final image =
+                          networkImage.isNotEmpty ? networkImage : TImages.user;
+
+                      return controller.imageUploading.value
+                          ? TShimmerEffect(width: 80, height: 80)
+                          : TCircularImage(
+                              image: image,
+                              width: 80,
+                              height: 80,
+                              isNetworkImage: networkImage.isNotEmpty,
+                            );
+                    }),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => controller.uploadUserProfilePicture(),
                       child: Text('Change Profile Picture'),
                     ),
                   ],

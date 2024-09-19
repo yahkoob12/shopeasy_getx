@@ -75,13 +75,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   /// --- Promo  Slider
-                  const TPromoSlider(
-                    banners: [
-                      TImages.promoBanner1,
-                      TImages.promoBanner2,
-                      TImages.promoBanner3,
-                    ],
-                  ),
+                  TPromoSlider(),
                   const SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),

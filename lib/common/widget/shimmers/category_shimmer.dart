@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shopeasy_getx/common/widget/shimmers/shimmer.dart';
 import 'package:shopeasy_getx/utils/constants/sizes.dart';
 
-class RCategoryShimmer extends StatelessWidget {
-  const RCategoryShimmer({super.key, this.itemCount = 6});
+class TCategoryShimmer extends StatelessWidget {
+  const TCategoryShimmer({super.key, this.itemCount = 6});
   final int itemCount;
   @override
   Widget build(BuildContext context) {

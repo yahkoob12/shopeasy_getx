@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopeasy_getx/bindings/general_bindings.dart';
 import 'package:shopeasy_getx/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:shopeasy_getx/routes/app_routes.dart';
 import 'package:shopeasy_getx/utils/constants/colors.dart';
 
 import 'utils/constants/text_strings.dart';
@@ -21,6 +22,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       scrollBehavior: MyCustomScrollBehavior(),
       initialBinding: GeneralBindings(),
+      getPages: AppRoutes.pages,
       //home: OnBoardingScreen(),
 
       /// Show Loader or Circular Progress indicator meanwhile Authentication Repository is deciding to show relevant screen
