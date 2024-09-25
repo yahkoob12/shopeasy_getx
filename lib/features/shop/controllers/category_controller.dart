@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:shopeasy_getx/data/repositories/categories/category_repository.dart';
+import 'package:shopeasy_getx/data/repositories/product/product_repository.dart';
 import 'package:shopeasy_getx/features/shop/models/category_model.dart';
+import 'package:shopeasy_getx/features/shop/models/product_model.dart';
 import 'package:shopeasy_getx/utils/popups/loaders.dart';
 
 class CategoryController extends GetxController {
@@ -43,6 +45,28 @@ class CategoryController extends GetxController {
   }
 
   ///---Load selected category data
+  Future<List<CategoryModel>> getSubCategories(String categoryId) async {
+    try {
+      final subCategories =
+          await _categoryRepository.getSubCategories(categoryId);
+      return subCategories;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Oh Snap !', message: e.toString());
+      return [];
+    }
+  }
 
   /// Get category or Sub-Category Products
+  Future<List<ProductModel>> getCategoryProducts(
+      {required String categoryId, int limit = 4}) async {
+    try {
+      // Fetch limited (4) products against each subcategory
+      final products = await ProductRepository.instance
+          .getProductsForCategory(categoryId: categoryId, limit: limit);
+      return products;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Oh Snap !', message: e.toString());
+      return [];
+    }
+  }
 }

@@ -5,7 +5,6 @@ import 'package:shopeasy_getx/common/widget/custom_shapes/Container/circular_con
 import 'package:shopeasy_getx/common/widget/images/rounded_image.dart';
 import 'package:shopeasy_getx/common/widget/shimmers/shimmer.dart';
 import 'package:shopeasy_getx/features/shop/controllers/banner_controller.dart';
-import 'package:shopeasy_getx/features/shop/controllers/home_controller.dart';
 import 'package:shopeasy_getx/utils/constants/colors.dart';
 
 import 'package:shopeasy_getx/utils/constants/sizes.dart';

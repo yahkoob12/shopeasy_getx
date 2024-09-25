@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shopeasy_getx/common/widget/success_screen/success_screen.dart';
 import 'package:shopeasy_getx/data/repositories/authentication/authentication_repository.dart';
 import 'package:shopeasy_getx/features/authentication/controllers/signup/verify_email_controller.dart';
-import 'package:shopeasy_getx/features/authentication/screens/login/login.dart';
 import 'package:shopeasy_getx/utils/constants/image_strings.dart';
 import 'package:shopeasy_getx/utils/constants/sizes.dart';
 import 'package:shopeasy_getx/utils/constants/text_strings.dart';

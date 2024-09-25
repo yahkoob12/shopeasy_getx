@@ -1,6 +1,9 @@
 import 'package:shopeasy_getx/features/shop/models/banner_model.dart';
 import 'package:shopeasy_getx/features/shop/models/brand_model.dart';
 import 'package:shopeasy_getx/features/shop/models/category_model.dart';
+import 'package:shopeasy_getx/features/shop/models/product_attribute_model.dart';
+import 'package:shopeasy_getx/features/shop/models/product_model.dart';
+import 'package:shopeasy_getx/features/shop/models/product_veriation_model.dart';
 import 'package:shopeasy_getx/routes/routes.dart';
 import 'package:shopeasy_getx/utils/constants/image_strings.dart';
 
@@ -185,4 +188,61 @@ class TDummyData {
   ];
 
   /// List of all Brand Categories
+
+  /// -- List of all  products
+  static final List<ProductModel> product = [
+    ProductModel(
+        id: '001',
+        title: 'Green Nike Sports Shoe',
+        stock: 15,
+        price: 135,
+        isFeatured: true,
+        thumbnail: TImages.productImage1,
+        description: 'Green Nike Sports shoe',
+        brand: BrandModel(
+            id: '1',
+            image: TImages.nikeLogo,
+            name: 'Nike',
+            productsCount: 265,
+            isFeatured: true),
+        images: [
+          TImages.productImage1,
+          TImages.productImage23,
+          TImages.productImage21,
+          TImages.productImage9
+        ],
+        salePrice: 55,
+        sku: 'ABR4568',
+        categoryId: '1',
+        productAttributes: [
+          ProductAttributeModel(
+              name: 'Color', values: ['Green', 'Red', 'Black']),
+          ProductAttributeModel(
+              name: 'Size', values: ['EU 30', 'EU 32', 'EU 36']),
+        ],
+        productVariations: [
+          ProductVariationModel(
+              id: '2',
+              stock: 34,
+              price: 134,
+              salePrice: 122,
+              image: TImages.productImage23,
+              attributeValues: {'Color': 'Black', 'Size': 'EU 32'}),
+          ProductVariationModel(
+              id: '3',
+              stock: 34,
+              price: 134,
+              salePrice: 122,
+              image: TImages.productImage23,
+              attributeValues: {'Color': 'red', 'Size': 'EU 34'}),
+          ProductVariationModel(
+              id: '4',
+              stock: 34,
+              price: 134,
+              salePrice: 122,
+              image: TImages.productImage1,
+              attributeValues: {'Color': 'Green', 'Size': 'EU 36'}),
+        ],
+        productType: 'ProductType.variable'),
+  ];
 }

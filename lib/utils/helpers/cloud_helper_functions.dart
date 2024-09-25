@@ -1,9 +1,11 @@
-import 'dart:html' as html;
-import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+// lib/utils/helpers/cloud_helper_functions.dart
+// export 'cloud_helper_functions_web.dart'
+//     if (dart.library.html) 'cloud_helper_functions_web.dart'
+//     if (dart.library.io) 'cloud_helper_functions_mobile.dart';
 
 /// Helper functions for cloud-related operations.
 class TCloudHelperFunctions {
@@ -60,7 +62,7 @@ class TCloudHelperFunctions {
     return null;
   }
 
-  /// Create a reference with an initial file path and name and retrieve the download URL.
+  // Create a reference with an initial file path and name and retrieve the download URL.
   static Future<String> getURLFromFilePathAndName(String path) async {
     try {
       if (path.isEmpty) return '';
@@ -76,64 +78,64 @@ class TCloudHelperFunctions {
     }
   }
 
-  /// Retrieve the download URL from a given storage URI.
-  static Future<String> getURLFromURI(String url) async {
-    try {
-      if (url.isEmpty) return '';
-      final ref = FirebaseStorage.instance.refFromURL(url);
-      final downloadUrl = await ref.getDownloadURL();
-      return downloadUrl;
-    } on FirebaseException catch (e) {
-      throw e.message!;
-    } on PlatformException catch (e) {
-      throw e.message!;
-    } catch (e) {
-      throw 'Something went wrong.';
-    }
-  }
+  // /// Retrieve the download URL from a given storage URI.
+  // static Future<String> getURLFromURI(String url) async {
+  //   try {
+  //     if (url.isEmpty) return '';
+  //     final ref = FirebaseStorage.instance.refFromURL(url);
+  //     final downloadUrl = await ref.getDownloadURL();
+  //     return downloadUrl;
+  //   } on FirebaseException catch (e) {
+  //     throw e.message!;
+  //   } on PlatformException catch (e) {
+  //     throw e.message!;
+  //   } catch (e) {
+  //     throw 'Something went wrong.';
+  //   }
+  // }
 
-  /// Upload any Image using File
-  static Future<String> uploadImageFile(
-      {required html.File file,
-      required String path,
-      required String imageName}) async {
-    try {
-      final ref = FirebaseStorage.instance.ref(path).child(imageName);
-      await ref.putBlob(file);
+  // /// Upload any Image using File
+  // static Future<String> uploadImageFile(
+  //     {required html.File file,
+  //     required String path,
+  //     required String imageName}) async {
+  //   try {
+  //     final ref = FirebaseStorage.instance.ref(path).child(imageName);
+  //     await ref.putBlob(file);
 
-      final String downloadURL = await ref.getDownloadURL();
+  //     final String downloadURL = await ref.getDownloadURL();
 
-      // Return the download URL
-      return downloadURL;
-    } on FirebaseException catch (e) {
-      throw e.message!;
-    } on SocketException catch (e) {
-      throw e.message;
-    } on PlatformException catch (e) {
-      throw e.message!;
-    } catch (e) {
-      throw e.toString();
-    }
-  }
+  //     // Return the download URL
+  //     return downloadURL;
+  //   } on FirebaseException catch (e) {
+  //     throw e.message!;
+  //   } on SocketException catch (e) {
+  //     throw e.message;
+  //   } on PlatformException catch (e) {
+  //     throw e.message!;
+  //   } catch (e) {
+  //     throw e.toString();
+  //   }
+  // }
 
-  static Future<void> deleteFileFromStorage(String downloadUrl) async {
-    try {
-      Reference ref = FirebaseStorage.instance.refFromURL(downloadUrl);
-      await ref.delete();
+  // static Future<void> deleteFileFromStorage(String downloadUrl) async {
+  //   try {
+  //     Reference ref = FirebaseStorage.instance.refFromURL(downloadUrl);
+  //     await ref.delete();
 
-      print('File deleted successfully.');
-    } on FirebaseException catch (e) {
-      if (e.code == 'object-not-found') {
-        print('The file does not exist in Firebase Storage.');
-      } else {
-        throw e.message!;
-      }
-    } on SocketException catch (e) {
-      throw e.message;
-    } on PlatformException catch (e) {
-      throw e.message!;
-    } catch (e) {
-      throw e.toString();
-    }
-  }
+  //     print('File deleted successfully.');
+  //   } on FirebaseException catch (e) {
+  //     if (e.code == 'object-not-found') {
+  //       print('The file does not exist in Firebase Storage.');
+  //     } else {
+  //       throw e.message!;
+  //     }
+  //   } on SocketException catch (e) {
+  //     throw e.message;
+  //   } on PlatformException catch (e) {
+  //     throw e.message!;
+  //   } catch (e) {
+  //     throw e.toString();
+  //   }
+  // }
 }

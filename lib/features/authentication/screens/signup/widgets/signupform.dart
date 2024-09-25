@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shopeasy_getx/features/authentication/controllers/signup/signup_controller.dart';
-import 'package:shopeasy_getx/features/authentication/screens/signup/verify_email.dart';
 import 'package:shopeasy_getx/features/authentication/screens/signup/widgets/termandcondition.dart';
 
 import 'package:shopeasy_getx/utils/constants/sizes.dart';
 import 'package:shopeasy_getx/utils/constants/text_strings.dart';
-import 'package:shopeasy_getx/utils/helpers/helper_functions.dart';
 import 'package:shopeasy_getx/utils/validators/validation.dart';
 
 class TSignupForm extends StatelessWidget {

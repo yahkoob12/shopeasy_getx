@@ -14,7 +14,6 @@ class TLocalStorage {
     return _instance!;
   }
 
-
   /// Asynchronous initialization method
   static Future<void> init(String bucketName) async {
     // Very Important when you want to use Bucket's
@@ -25,6 +24,10 @@ class TLocalStorage {
 
   /// Generic method to save data
   Future<void> writeData<T>(String key, T value) async {
+    await _storage.write(key, value);
+  }
+
+  Future<void> saveData<T>(String key, T value) async {
     await _storage.write(key, value);
   }
 

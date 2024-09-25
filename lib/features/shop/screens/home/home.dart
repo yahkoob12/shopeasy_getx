@@ -5,12 +5,13 @@ import 'package:shopeasy_getx/common/widget/custom_shapes/Container/primary_head
 import 'package:shopeasy_getx/common/widget/custom_shapes/Container/search_container.dart';
 import 'package:shopeasy_getx/common/widget/layouts/grid_layout.dart';
 import 'package:shopeasy_getx/common/widget/products/product_cards/product_card_vertical.dart';
+import 'package:shopeasy_getx/common/widget/shimmers/vertical_product_shimmer.dart';
 import 'package:shopeasy_getx/common/widget/texts/section_heading.dart';
+import 'package:shopeasy_getx/features/shop/controllers/product/product_controller.dart';
 import 'package:shopeasy_getx/features/shop/screens/all_products/all_products.dart';
 import 'package:shopeasy_getx/features/shop/screens/home/widget/home_appbar.dart';
 import 'package:shopeasy_getx/features/shop/screens/home/widget/home_categories.dart';
 import 'package:shopeasy_getx/features/shop/screens/home/widget/promo_slider.dart';
-import 'package:shopeasy_getx/utils/constants/image_strings.dart';
 
 import 'package:shopeasy_getx/utils/constants/sizes.dart';
 
@@ -20,13 +21,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //////----------------------------Orginal code start-----------------------------------//////
-
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             ///Header
-            const TPrimaryHeaderContainer(
+            TPrimaryHeaderContainer(
               child: Column(
                 children: [
                   /// --- AppBar
@@ -76,22 +77,44 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   /// --- Promo  Slider
                   TPromoSlider(),
-                  const SizedBox(
+                  SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
 
                   /// Heading
                   TSectionheading(
                     title: 'Popular Products',
-                    onPressed: () => Get.to(() => AllProducts()),
+                    onPressed: () => Get.to(() => AllProducts(
+                          title: 'All Products',
+                          // query: FirebaseFirestore.instance
+                          //     .collection('Products')
+                          //     .where('isFeatured', isEqualTo: true)
+                          //     .limit(6),
+                          futureMethod: controller.fetchAllFeaturedProducts(),
+                        )),
                   ),
-                  const SizedBox(height: TSizes.spaceBtwItems),
+                  SizedBox(height: TSizes.spaceBtwItems),
 
                   /// --- Popular Product
-                  TGridLayout(
-                    itemBuilder: (_, index) => const TProductCardVertical(),
-                    itemCount: 8,
-                  ),
+                  Obx(() {
+                    if (controller.isLoading.value)
+                      return TVerticalProductShimmer();
+
+                    if (controller.featuredProducts.isEmpty) {
+                      return Center(
+                        child: Text(
+                          ' No Data Found',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      );
+                    }
+                    return TGridLayout(
+                      itemBuilder: (_, index) => TProductCardVertical(
+                        product: controller.featuredProducts[index],
+                      ),
+                      itemCount: controller.featuredProducts.length,
+                    );
+                  }),
                 ],
               ),
             ),

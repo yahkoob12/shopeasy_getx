@@ -4,17 +4,21 @@ import 'package:shopeasy_getx/common/widget/images/circular_image.dart';
 import 'package:shopeasy_getx/common/widget/texts/product_price_text.dart';
 import 'package:shopeasy_getx/common/widget/texts/product_title_text.dart';
 import 'package:shopeasy_getx/common/widget/texts/t_brand_title_text_with_verified_icon.dart';
+import 'package:shopeasy_getx/features/shop/controllers/product/product_controller.dart';
+import 'package:shopeasy_getx/features/shop/models/product_model.dart';
 import 'package:shopeasy_getx/utils/constants/colors.dart';
 import 'package:shopeasy_getx/utils/constants/enums.dart';
-import 'package:shopeasy_getx/utils/constants/image_strings.dart';
 import 'package:shopeasy_getx/utils/constants/sizes.dart';
 import 'package:shopeasy_getx/utils/helpers/helper_functions.dart';
 
 class TProductMetaData extends StatelessWidget {
-  const TProductMetaData({super.key});
-
+  const TProductMetaData({super.key, required this.product});
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final selePercentage =
+        controller.CalculateSalePercentage(product.price, product.salePrice);
     final darkMode = THelperFunctions.isDarkMode(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,10 +30,10 @@ class TProductMetaData extends StatelessWidget {
             TRoundedContainer(
               radius: TSizes.sm,
               backgroundColor: TColors.secondary.withOpacity(0.8),
-              padding: const EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                   horizontal: TSizes.sm, vertical: TSizes.xs),
               child: Text(
-                '25%',
+                '$selePercentage%',
                 style: Theme.of(context)
                     .textTheme
                     .labelLarge!
@@ -41,20 +45,24 @@ class TProductMetaData extends StatelessWidget {
             ),
 
             /// Price
-            Text(
-              '\$250',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .apply(decoration: TextDecoration.lineThrough),
-            ),
+            if (product.productType == ProductType.single.toString() &&
+                product.salePrice > 0)
+              Text(
+                '\${product.price}',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .apply(decoration: TextDecoration.lineThrough),
+              ),
             SizedBox(
               width: TSizes.spaceBtwItems,
             ),
-            TProductPriceText(
-              price: '175',
-              isLarge: true,
-            ),
+            if (product.productType == ProductType.single.toString() &&
+                product.salePrice > 0)
+              TProductPriceText(
+                price: controller.getProductPrice(product),
+                isLarge: true,
+              ),
           ],
         ),
         SizedBox(
@@ -62,7 +70,7 @@ class TProductMetaData extends StatelessWidget {
         ),
 
         /// Title
-        TProductTitleText(title: 'Green Nike Sporta Shirt'),
+        TProductTitleText(title: product.title),
         SizedBox(
           height: TSizes.spaceBtwItems / 1.5,
         ),
@@ -75,7 +83,7 @@ class TProductMetaData extends StatelessWidget {
               width: TSizes.spaceBtwItems,
             ),
             Text(
-              'In Stock',
+              controller.getProductStockStatus(product.stock),
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
@@ -88,13 +96,13 @@ class TProductMetaData extends StatelessWidget {
         Row(
           children: [
             TCircularImage(
-              image: TImages.nikeLogo,
+              image: product.brand != null ? product.brand!.image : '',
               width: 32,
               height: 32,
               overlayColor: darkMode ? TColors.white : TColors.black,
             ),
             TBrandTitleWithVerifiedIcon(
-              title: 'nike',
+              title: product.brand != null ? product.brand!.name : '',
               brandTextSizes: TextSizes.medium,
             ),
           ],

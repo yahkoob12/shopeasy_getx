@@ -8,6 +8,7 @@ import 'package:shopeasy_getx/common/widget/list_tiles/setting_menu_tile.dart';
 
 import 'package:shopeasy_getx/common/widget/list_tiles/user_profile_tile.dart';
 import 'package:shopeasy_getx/common/widget/texts/section_heading.dart';
+import 'package:shopeasy_getx/features/authentication/screens/login/login.dart';
 import 'package:shopeasy_getx/features/personalization/screens/address/address.dart';
 import 'package:shopeasy_getx/features/personalization/screens/profile/profile.dart';
 import 'package:shopeasy_getx/features/shop/screens/order/order.dart';
@@ -145,7 +146,8 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                        onPressed: () {}, child: const Text('Logout')),
+                        onPressed: () => Get.to(() => LoginScreen()),
+                        child: const Text('Logout')),
                   ),
                   const SizedBox(
                     height: TSizes.spaceBtwItems,

@@ -15,6 +15,7 @@ import 'package:shopeasy_getx/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:shopeasy_getx/utils/exceptions/firebase_exceptions.dart';
 import 'package:shopeasy_getx/utils/exceptions/format_exceptions.dart';
 import 'package:shopeasy_getx/utils/exceptions/platform_exceptions.dart';
+import 'package:shopeasy_getx/utils/local_storage/storage_utility.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -41,6 +42,8 @@ class AuthenticationRepository extends GetxController {
     if (user != null) {
       // if the user is logged in
       if (user.emailVerified) {
+        // Initialize User Specific Storage
+        await TLocalStorage.init(user.uid);
         // if the user's  email is verified. navigate to the main navigation menu
         Get.offAll(() => const NavigationMenu());
       } else {

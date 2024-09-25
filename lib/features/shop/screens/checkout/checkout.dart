@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shopeasy_getx/common/widget/appbar/appbar.dart';
 import 'package:shopeasy_getx/common/widget/custom_shapes/Container/rounded_container.dart';
 
 import 'package:shopeasy_getx/common/widget/products/cart/coupon_widget.dart';
-import 'package:shopeasy_getx/common/widget/success_screen/success_screen.dart';
+import 'package:shopeasy_getx/features/shop/controllers/product/cart_controller.dart';
+import 'package:shopeasy_getx/features/shop/controllers/product/order_controller.dart';
 import 'package:shopeasy_getx/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:shopeasy_getx/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:shopeasy_getx/features/shop/screens/checkout/widgets/billing_paymant_section.dart';
 import 'package:shopeasy_getx/features/shop/screens/checkout/widgets/billing_amount_section.dart';
-import 'package:shopeasy_getx/navigation_menu.dart';
 import 'package:shopeasy_getx/utils/constants/colors.dart';
-import 'package:shopeasy_getx/utils/constants/image_strings.dart';
 
 import 'package:shopeasy_getx/utils/constants/sizes.dart';
 import 'package:shopeasy_getx/utils/helpers/helper_functions.dart';
+import 'package:shopeasy_getx/utils/helpers/pricing_calculator.dart';
+import 'package:shopeasy_getx/utils/popups/loaders.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final cartController = CartController.instance;
+    final subTotal = cartController.totalCartPrice.value;
+    final orderController = Get.put(OrderController());
+    final totalAmout = TPricingCalculator.calculateTotalPrice(subTotal, 'US');
     final dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: TAppBar(
@@ -92,15 +96,12 @@ class CheckoutScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.all(TSizes.defaultSpace),
         child: ElevatedButton(
-            onPressed: () => Get.to(
-                  () => SuccessScreen(
-                    image: TImages.successfulPaymentIcon,
-                    title: 'Payment Success!',
-                    subTitle: 'Your item will be shipped soon!',
-                    onPressed: () => Get.offAll(() => NavigationMenu()),
-                  ),
-                ),
-            child: Text('Checkout \$1532')),
+            onPressed: subTotal > 0
+                ? () => orderController.processOrder(totalAmout)
+                : () => TLoaders.warningSnackBar(
+                    title: 'Empty Cart',
+                    message: 'Add items in the cart in order to proceed'),
+            child: Text('Checkout \$$totalAmout')),
       ),
     );
   }

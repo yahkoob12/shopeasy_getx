@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:shopeasy_getx/data/repositories/authentication/authentication_repository.dart';
 import 'package:shopeasy_getx/data/repositories/user/user_repository.dart';
 import 'package:shopeasy_getx/features/authentication/models/user_models.dart';

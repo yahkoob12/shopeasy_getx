@@ -1,49 +1,76 @@
 import 'package:flutter/material.dart';
-import 'package:shopeasy_getx/common/widget/brands/brand_show_case.dart';
+import 'package:get/get.dart';
 import 'package:shopeasy_getx/common/widget/layouts/grid_layout.dart';
 import 'package:shopeasy_getx/common/widget/products/product_cards/product_card_vertical.dart';
+import 'package:shopeasy_getx/common/widget/shimmers/vertical_product_shimmer.dart';
 import 'package:shopeasy_getx/common/widget/texts/section_heading.dart';
+import 'package:shopeasy_getx/features/shop/controllers/category_controller.dart';
 import 'package:shopeasy_getx/features/shop/models/category_model.dart';
-import 'package:shopeasy_getx/utils/constants/image_strings.dart';
+import 'package:shopeasy_getx/features/shop/models/product_model.dart';
+import 'package:shopeasy_getx/features/shop/screens/all_products/all_products.dart';
+import 'package:shopeasy_getx/features/shop/screens/store/widgets/category_brands.dart';
 import 'package:shopeasy_getx/utils/constants/sizes.dart';
+import 'package:shopeasy_getx/utils/helpers/cloud_helper_functions.dart';
 
 class TCategoryTab extends StatelessWidget {
   const TCategoryTab({super.key, required this.category});
   final CategoryModel category;
   @override
   Widget build(BuildContext context) {
+    final controller = CategoryController.instance;
     return ListView(
       shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
+      physics: NeverScrollableScrollPhysics(),
       children: [
         Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
               /// --- Brands
-              const TBrandShowcase(
-                images: [
-                  TImages.productImage3,
-                  TImages.productImage2,
-                  TImages.productImage1
-                ],
-              ),
-              const SizedBox(
+              CategoryBrands(category: category),
+              // TBrandShowcase(
+              //   images: [
+              //     TImages.productImage3,
+              //     TImages.productImage2,
+              //     TImages.productImage1
+              //   ],
+              // ),
+              SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
 
               /// --- Products
-              TSectionheading(
-                title: 'You might like',
-                onPressed: () {},
-              ),
-              const SizedBox(
-                height: TSizes.spaceBtwItems,
-              ),
+              FutureBuilder(
+                  future:
+                      controller.getCategoryProducts(categoryId: category.id),
+                  builder: (context, snapshot) {
+                    /// Helper  Function : Handle Loader , No Record ,Or Error Message
+                    final response =
+                        TCloudHelperFunctions.checkMultiRecordState(
+                            snapshot: snapshot,
+                            loader: TVerticalProductShimmer());
 
-              TGridLayout(
-                  itemCount: 8,
-                  itemBuilder: (_, index) => const TProductCardVertical())
+                    //
+                    return Column(
+                      children: [
+                        TSectionheading(
+                          title: 'You might like',
+                          onPressed: () => Get.to(AllProducts(
+                              title: category.name,
+                              futureMethod: controller.getCategoryProducts(
+                                  categoryId: category.id, limit: -1))),
+                        ),
+                        SizedBox(
+                          height: TSizes.spaceBtwItems,
+                        ),
+                        TGridLayout(
+                            itemCount: 4,
+                            itemBuilder: (_, index) => TProductCardVertical(
+                                  product: ProductModel.empty(),
+                                )),
+                      ],
+                    );
+                  }),
             ],
           ),
         ),

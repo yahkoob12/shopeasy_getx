@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shopeasy_getx/common/widget/custom_shapes/Container/rounded_container.dart';
 import 'package:shopeasy_getx/common/widget/images/circular_image.dart';
 import 'package:shopeasy_getx/common/widget/texts/t_brand_title_text_with_verified_icon.dart';
+import 'package:shopeasy_getx/features/shop/models/brand_model.dart';
 import 'package:shopeasy_getx/utils/constants/colors.dart';
 import 'package:shopeasy_getx/utils/constants/enums.dart';
-import 'package:shopeasy_getx/utils/constants/image_strings.dart';
 import 'package:shopeasy_getx/utils/constants/sizes.dart';
 import 'package:shopeasy_getx/utils/helpers/helper_functions.dart';
 
@@ -13,7 +13,9 @@ class TBrandCard extends StatelessWidget {
     super.key,
     required this.showBorder,
     this.onTap,
+    required this.brand,
   });
+  final BrandModel brand;
   final bool showBorder;
   final void Function()? onTap;
   @override
@@ -33,8 +35,8 @@ class TBrandCard extends StatelessWidget {
             /// --Icons
             Flexible(
               child: TCircularImage(
-                image: TImages.clothIcon,
-                isNetworkImage: false,
+                image: brand.image,
+                isNetworkImage: true,
                 backgroundColor: Colors.transparent,
                 overlayColor: THelperFunctions.isDarkMode(context)
                     ? TColors.white
@@ -70,12 +72,12 @@ class TBrandCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TBrandTitleWithVerifiedIcon(
-                    title: 'Nike',
+                  TBrandTitleWithVerifiedIcon(
+                    title: brand.name,
                     brandTextSizes: TextSizes.large,
                   ),
                   Text(
-                    '999+ Products',
+                    '${brand.productsCount ?? 0} products',
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelMedium,
                   )

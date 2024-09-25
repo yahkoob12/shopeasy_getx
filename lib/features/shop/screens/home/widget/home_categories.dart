@@ -1,11 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopeasy_getx/common/widget/image_text_widget/vertical_image_text.dart';
 import 'package:shopeasy_getx/common/widget/shimmers/category_shimmer.dart';
 import 'package:shopeasy_getx/features/shop/controllers/category_controller.dart';
 import 'package:shopeasy_getx/features/shop/screens/sub_category/sub_categories.dart';
-import 'package:shopeasy_getx/utils/constants/image_strings.dart';
 
 class THomeCategories extends StatelessWidget {
   const THomeCategories({
@@ -39,7 +37,9 @@ class THomeCategories extends StatelessWidget {
             return TVerticalImageText(
               image: category.image,
               title: category.name,
-              onTap: () => Get.to(() => SubCategoriesScreen()),
+              onTap: () => Get.to(() => SubCategoriesScreen(
+                    category: category,
+                  )),
             );
           },
         ),
