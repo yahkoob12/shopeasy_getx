@@ -10,6 +10,7 @@ import 'package:shopeasy_getx/common/widget/shimmers/brand_shimmer.dart';
 import 'package:shopeasy_getx/common/widget/texts/section_heading.dart';
 import 'package:shopeasy_getx/features/shop/controllers/brand_controller.dart';
 import 'package:shopeasy_getx/features/shop/controllers/category_controller.dart';
+import 'package:shopeasy_getx/features/shop/models/product_model.dart';
 import 'package:shopeasy_getx/features/shop/screens/brand/all_brands.dart';
 import 'package:shopeasy_getx/features/shop/screens/brand/brand_products.dart';
 import 'package:shopeasy_getx/features/shop/screens/store/widgets/category_tab.dart';
@@ -18,7 +19,9 @@ import 'package:shopeasy_getx/utils/constants/sizes.dart';
 import 'package:shopeasy_getx/utils/helpers/helper_functions.dart';
 
 class StoreScreen extends StatelessWidget {
-  const StoreScreen({super.key});
+  const StoreScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +135,9 @@ class StoreScreen extends StatelessWidget {
           /// --- Body
           body: TabBarView(
             children: categories
-                .map((category) => TCategoryTab(category: category))
+                .map((category) => TCategoryTab(
+                      category: category,
+                    ))
                 .toList(),
           ),
         ),

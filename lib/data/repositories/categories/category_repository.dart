@@ -15,7 +15,7 @@ class CategoryRepository extends GetxController {
   ///Get all categories
   Future<List<CategoryModel>> getAllCategories() async {
     try {
-      final snapshot = await _db.collection('collectionPath').get();
+      final snapshot = await _db.collection('Categories').get();
       final list = snapshot.docs
           .map((document) => CategoryModel.fromSnapshot(document))
           .toList();
@@ -60,14 +60,14 @@ class CategoryRepository extends GetxController {
 
         //Upload Image and get its URl
         final url =
-            await storage.uploadImageData('categories', file, category.name);
+            await storage.uploadImageData('Categories', file, category.name);
 
         //assign URL to Category.image attribute
         category.image = url;
 
         //store Category in Firestore
         await _db
-            .collection('Categories')
+            .collection("Categories")
             .doc(category.id)
             .set(category.toJson());
       }

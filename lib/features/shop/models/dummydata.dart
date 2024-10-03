@@ -11,7 +11,7 @@ class TDummyData {
   /// --- Banners
   static final List<BannerModel> banners = [
     BannerModel(
-        imageUrl: TImages.banner1, targetScreen: TRoutes.order, active: false),
+        imageUrl: TImages.banner1, targetScreen: TRoutes.order, active: true),
     BannerModel(
         imageUrl: TImages.banner2, targetScreen: TRoutes.cart, active: false),
     BannerModel(
@@ -19,11 +19,9 @@ class TDummyData {
         targetScreen: TRoutes.favourites,
         active: false),
     BannerModel(
-        imageUrl: TImages.banner4, targetScreen: TRoutes.search, active: false),
+        imageUrl: TImages.banner4, targetScreen: TRoutes.search, active: true),
     BannerModel(
-        imageUrl: TImages.banner5,
-        targetScreen: TRoutes.setting,
-        active: false),
+        imageUrl: TImages.banner5, targetScreen: TRoutes.setting, active: true),
     BannerModel(
         imageUrl: TImages.banner6,
         targetScreen: TRoutes.userAddress,
@@ -190,7 +188,7 @@ class TDummyData {
   /// List of all Brand Categories
 
   /// -- List of all  products
-  static final List<ProductModel> product = [
+  static final List<ProductModel> products = [
     ProductModel(
         id: '001',
         title: 'Green Nike Sports Shoe',

@@ -36,9 +36,7 @@ class TVerticalImageText extends StatelessWidget {
               padding: TSizes.sm * 1.4,
               isNetworkImage: isNetworkImage,
               backgroundColor: backgroundColor,
-              overlayColor: THelperFunctions.isDarkMode(context)
-                  ? TColors.light
-                  : TColors.dark,
+              overlayColor: dark ? TColors.light : TColors.dark,
             ),
             // Container(
             //   width: 56,
@@ -63,7 +61,7 @@ class TVerticalImageText extends StatelessWidget {
               height: TSizes.spaceBtwItems / 2,
             ),
             SizedBox(
-                width: 55,
+                width: 50,
                 child: Text(
                   title,
                   style: Theme.of(context).textTheme.labelMedium!.apply(

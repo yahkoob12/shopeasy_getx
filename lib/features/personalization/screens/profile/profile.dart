@@ -7,6 +7,7 @@ import 'package:shopeasy_getx/common/widget/shimmers/shimmer.dart';
 import 'package:shopeasy_getx/common/widget/texts/section_heading.dart';
 import 'package:shopeasy_getx/features/authentication/screens/login/login.dart';
 import 'package:shopeasy_getx/features/personalization/controllers/user_controller.dart';
+import 'package:shopeasy_getx/features/personalization/screens/profile/widgets/change_name.dart';
 import 'package:shopeasy_getx/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:shopeasy_getx/utils/constants/image_strings.dart';
 import 'package:shopeasy_getx/utils/constants/sizes.dart';
@@ -75,7 +76,7 @@ class ProfileScreen extends StatelessWidget {
               ),
 
               TProfileMenu(
-                onPressed: () {},
+                onPressed: () => Get.to(() => ChangeName()),
                 title: 'Name',
                 value: controller.user.value.fullName,
               ),
@@ -145,7 +146,7 @@ class ProfileScreen extends StatelessWidget {
                     style: OutlinedButton.styleFrom(
                       side: BorderSide(color: Colors.red),
                     ),
-                    onPressed: () => controller.deleteAccountWarningPopup,
+                    onPressed: () => controller.deleteAccountWarningPopup(),
                     child: Text(
                       'Delete account',
                       style: TextStyle(color: Colors.red),

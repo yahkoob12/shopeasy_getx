@@ -20,8 +20,8 @@ class ProductRepository extends GetxController {
   Future<List<ProductModel>> getFeaturedProducts() async {
     try {
       final snapshot = await _db
-          .collection('products')
-          .where('isFeatured', isEqualTo: true)
+          .collection('Products')
+          .where('IsFeatured', isEqualTo: true)
           .limit(4)
           .get();
       return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
@@ -38,8 +38,8 @@ class ProductRepository extends GetxController {
   Future<List<ProductModel>> getAllFeaturedProducts() async {
     try {
       final snapshot = await _db
-          .collection('products')
-          .where('isFeatured', isEqualTo: true)
+          .collection('Products')
+          .where('IsFeatured', isEqualTo: true)
           .get();
       return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
     } on FirebaseException catch (e) {

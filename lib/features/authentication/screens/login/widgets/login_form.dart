@@ -89,7 +89,7 @@ class LoginForm extends StatelessWidget {
               width: double.infinity,
               child: OutlinedButton(
                 onPressed: () => Get.to(
-                  () => const NavigationMenu(),
+                  () => controller.emailAndPasswordSignIn(),
                 ),
                 child: const Text(TTexts.signIn),
               ),

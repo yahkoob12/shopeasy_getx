@@ -5,6 +5,7 @@ import 'package:shopeasy_getx/common/widget/products/product_cards/product_card_
 import 'package:shopeasy_getx/common/widget/shimmers/vertical_product_shimmer.dart';
 import 'package:shopeasy_getx/common/widget/texts/section_heading.dart';
 import 'package:shopeasy_getx/features/shop/controllers/category_controller.dart';
+import 'package:shopeasy_getx/features/shop/controllers/product/product_controller.dart';
 import 'package:shopeasy_getx/features/shop/models/category_model.dart';
 import 'package:shopeasy_getx/features/shop/models/product_model.dart';
 import 'package:shopeasy_getx/features/shop/screens/all_products/all_products.dart';
@@ -13,10 +14,15 @@ import 'package:shopeasy_getx/utils/constants/sizes.dart';
 import 'package:shopeasy_getx/utils/helpers/cloud_helper_functions.dart';
 
 class TCategoryTab extends StatelessWidget {
-  const TCategoryTab({super.key, required this.category});
+  const TCategoryTab({
+    super.key,
+    required this.category,
+  });
   final CategoryModel category;
+
   @override
   Widget build(BuildContext context) {
+    final productcontroller = Get.put(ProductController());
     final controller = CategoryController.instance;
     return ListView(
       shrinkWrap: true,
@@ -64,9 +70,11 @@ class TCategoryTab extends StatelessWidget {
                           height: TSizes.spaceBtwItems,
                         ),
                         TGridLayout(
-                            itemCount: 4,
+                            itemCount:
+                                productcontroller.featuredProducts.length,
                             itemBuilder: (_, index) => TProductCardVertical(
-                                  product: ProductModel.empty(),
+                                  product:
+                                      productcontroller.featuredProducts[index],
                                 )),
                       ],
                     );

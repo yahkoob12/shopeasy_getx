@@ -119,7 +119,7 @@ class UserController extends GetxController {
           auth.authUser!.providerData.map((e) => e.providerId).first;
       if (provider.isNotEmpty) {
         //Re verify Auth Email
-        if (provider == 'Google.com') {
+        if (provider == 'google.com') {
           await auth.signWithGoogle();
           await auth.deleteAccount();
           TFullScreenLoader.stopLoading();

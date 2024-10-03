@@ -15,6 +15,7 @@ class VerifyEmailController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    sendEmailVerification();
     setTimerForAutoRedirect();
   }
 
