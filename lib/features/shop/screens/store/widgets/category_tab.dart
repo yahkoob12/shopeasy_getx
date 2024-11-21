@@ -7,7 +7,6 @@ import 'package:shopeasy_getx/common/widget/texts/section_heading.dart';
 import 'package:shopeasy_getx/features/shop/controllers/category_controller.dart';
 import 'package:shopeasy_getx/features/shop/controllers/product/product_controller.dart';
 import 'package:shopeasy_getx/features/shop/models/category_model.dart';
-import 'package:shopeasy_getx/features/shop/models/product_model.dart';
 import 'package:shopeasy_getx/features/shop/screens/all_products/all_products.dart';
 import 'package:shopeasy_getx/features/shop/screens/store/widgets/category_brands.dart';
 import 'package:shopeasy_getx/utils/constants/sizes.dart';

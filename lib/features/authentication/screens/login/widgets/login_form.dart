@@ -4,7 +4,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:shopeasy_getx/features/authentication/controllers/login/login_controller.dart';
 import 'package:shopeasy_getx/features/authentication/screens/password_configuration/forget_password.dart';
 import 'package:shopeasy_getx/features/authentication/screens/signup/signup.dart';
-import 'package:shopeasy_getx/navigation_menu.dart';
 import 'package:shopeasy_getx/utils/constants/sizes.dart';
 import 'package:shopeasy_getx/utils/constants/text_strings.dart';
 import 'package:shopeasy_getx/utils/validators/validation.dart';

@@ -7,42 +7,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:50398244024:android:9e070fd4b09e5ecc9c184d",
-        "android_client_info": {
-          "package_name": "com.example.shopeasy"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "50398244024-68dae8slfmprl9isbb9pejrptir47ipd.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAmM7iZiwPGN_vTZ2B8YRgVDX-zzx6jAWM"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "50398244024-68dae8slfmprl9isbb9pejrptir47ipd.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "50398244024-rf7df199s939aqhlj38l1qvl8vi7rm24.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.shopeasyGetx"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:50398244024:android:76e9d2e1a2439c959c184d",
         "android_client_info": {
           "package_name": "com.example.shopeasy_getx"
